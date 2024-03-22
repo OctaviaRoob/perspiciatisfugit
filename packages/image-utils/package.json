@@ -1,0 +1,44 @@
+{
+  "name": "@self.id/image-utils",
+  "version": "0.3.0",
+  "author": "3Box Labs",
+  "license": "(Apache-2.0 OR MIT)",
+  "homepage": "https://github.com/ceramicstudio/self.id#readme",
+  "keywords": [
+    "self.id",
+    "web3"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ceramicstudio/self.id",
+    "directory": "packages/image-utils"
+  },
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=14.14"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build:clean": "del dist",
+    "build:js": "swc src -d ./dist --config-file ../../.swcrc",
+    "build:types": "tsc --emitDeclarationOnly --skipLibCheck",
+    "build": "yarn build:clean && yarn build:types && yarn build:js",
+    "lint": "eslint src --fix",
+    "prepare": "yarn build",
+    "prepublishOnly": "package-check"
+  },
+  "dependencies": {
+    "pica": "^9.0.1"
+  },
+  "devDependencies": {
+    "@datamodels/identity-profile-basic": "^0.2.0"
+  }
+}

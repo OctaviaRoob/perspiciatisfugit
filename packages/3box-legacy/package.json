@@ -1,0 +1,63 @@
+{
+  "name": "@self.id/3box-legacy",
+  "version": "0.3.0",
+  "author": "3Box Labs",
+  "license": "(Apache-2.0 OR MIT)",
+  "homepage": "https://github.com/ceramicstudio/self.id#readme",
+  "keywords": [
+    "self.id",
+    "web3"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ceramicstudio/self.id",
+    "directory": "packages/3box-legacy"
+  },
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=14.14"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build:clean": "del dist",
+    "build:js": "swc src -d ./dist --config-file ../../.swcrc",
+    "build:types": "tsc --emitDeclarationOnly --skipLibCheck",
+    "build": "yarn build:clean && yarn build:types && yarn build:js",
+    "lint": "eslint src test --fix",
+    "test": "node --experimental-vm-modules $(yarn bin jest)",
+    "test:ci": "yarn test --ci --coverage",
+    "prepare": "yarn build",
+    "prepublishOnly": "package-check"
+  },
+  "dependencies": {
+    "cross-fetch": "^3.1.4"
+  },
+  "devDependencies": {
+    "@datamodels/identity-profile-basic": "^0.2.0",
+    "@glazed/types": "^0.2.0"
+  },
+  "jest": {
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    },
+    "transform": {
+      "^.+\\.(t|j)s$": [
+        "@swc/jest",
+        {
+          "root": "../.."
+        }
+      ]
+    }
+  }
+}
